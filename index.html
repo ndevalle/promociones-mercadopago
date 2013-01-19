@@ -11,7 +11,7 @@
 
 <h1>Cuotas sin interés con MercadoPago</h1>
 	
-<ul class="bank-promotions">
+<ul id="promo-list">
 
 </ul>
 
@@ -22,7 +22,7 @@ $.getJSON( "https://www.mercadopago.com/mla/credit_card_promos.json?marketplace=
                 null,
                 function(data) {
 
-                    var promotionsList = "";
+                    var promoItems = "";
                    
                     for(var i = 0; i < data.length; i++){
                       //var cardId = data[i].payment_methods;
@@ -30,12 +30,12 @@ $.getJSON( "https://www.mercadopago.com/mla/credit_card_promos.json?marketplace=
                       var cardIssuerName = data[i].issuer.name;
                       var maxInstallments = data[i].max_installments;
 
-                      promotionsList += "<li><p>" + cardIssuerName + "</p><p>En hasta " + maxInstallments + " cuotas sin interés.</strong></li>";
+                      promoItems += "<li><p>" + cardIssuerName + "</p><p>En hasta " + maxInstallments + " cuotas sin interés.</strong></li>";
                   
                     }
 
                     // show the info
-                    $(".bank-promotions").html(promotionsList);
+                    $("#promo-list").html(promoItems);
                   }
           );
 
