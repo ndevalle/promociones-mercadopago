@@ -2,47 +2,54 @@
 <!DOCTYPE html>
 <html class="home" dir="ltr" lang="en-US">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width" />
-<title>Promociones MercadoPago</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width" />
+	<title>Promociones MercadoPago</title>
 </head>
 
 <body>
+	<h1>Cuotas sin interés con MercadoPago</h1>
 
-<h1>Cuotas sin interés con MercadoPago</h1>
-  
-<ul id="promoList">
+	<ul id="promoList"> </ul>
 
-</ul>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
-<script>
+	<script>
 
-$.getJSON( "https://www.mercadopago.com/mla/credit_card_promos.json?marketplace=NONE",
-                null,
-                function(data) {
+	$.getJSON("https://www.mercadopago.com/mla/credit_card_promos.json?marketplace=NONE&callback=?",
+  	null,
+  	function(data) {
+			var promoItem = "";
+			var promotions = [];
+			if(data[2] !== undefined)
+				promotions = data[2];
 
-                    var promoItem = "";
-                   
-                    for(var i = 0; i < data.length; i++){
-                      
-                      // will need this for logos 
-                      // var cardIssuerId = data[i].issuer.id;
-                      var cardIssuerName = data[i].issuer.name;
-                      var maxInstallments = data[i].max_installments;
-                      //var cardId = data[i].payment_methods;
+			for(var i = 0; i < promotions.length; i++) {
+				console.log(promotions);
+				var promotion = promotions[i]
 
-                      promoItem += "<li>Hasta <strong>" + maxInstallments + "</strong> cuotas con <strong>" + cardIssuerName + "</strong></li>";
-                  
-                    }
+				// will need this for logos
+				// var cardIssuerId = promotions.issuer.id;
+				var cardIssuerName = promotion.issuer.name;
+				var maxInstallments = promotion.max_installments;
+				var thumbnail = promotion.payment_methods[0].thumbnail;
+				//var cardId = promotions.payment_methods;
+				promoItem += '<li>';
 
-                    // show the info
-                    $("#promoList").html(promoItem);
-                  }
-          );
+				promoItem += '<img src="' + thumbnail + '" alt="' + cardIssuerName + '">';
 
-     
-  </script>
+				promoItem += '<p>\
+						Hasta <strong>' + maxInstallments + '</strong> cuotas con <strong>' + cardIssuerName + '</strong>\
+					</p>\
+				</li>';
+			}
+
+			// show the info
+			$("#promoList").html(promoItem);
+  	}
+	);
+
+	</script>
 
 </body>
 </html>
