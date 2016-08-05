@@ -16,39 +16,41 @@
 
 	<script>
 
-	$.getJSON("https://www.mercadopago.com/mla/credit_card_promos.json?marketplace=NONE&callback=?",
-  	null,
-  	function(data) {
-			var promoItem = "";
-			var promotions = [];
+		jQuery(function($) {
+			$.getJSON("https://www.mercadopago.com/mla/credit_card_promos.json?marketplace=NONE&callback=?",
+				null,
+				function(data) {
+					var promoItem = "";
+					var promotions = [];
 
-			// data is a JSONP type (array with 3 elements)
-			if(data[2] !== undefined)
-				promotions = data[2];
+					// data is a JSONP type (array with 3 elements)
+					if(data[2] !== undefined)
+						promotions = data[2];
 
-			for(var i = 0; i < promotions.length; i++) {
-				var promotion = promotions[i]
+					for(var i = 0; i < promotions.length; i++) {
+						var promotion = promotions[i]
 
-				// will need this for logos
-				// var cardIssuerId = promotions.issuer.id;
-				var cardIssuerName = promotion.issuer.name;
-				var maxInstallments = promotion.max_installments;
-				var thumbnail = promotion.payment_methods[0].thumbnail;
-				//var cardId = promotions.payment_methods;
-				promoItem += '<li>';
+						// will need this for logos
+						// var cardIssuerId = promotions.issuer.id;
+						var cardIssuerName = promotion.issuer.name;
+						var maxInstallments = promotion.max_installments;
+						var thumbnail = promotion.payment_methods[0].thumbnail;
+						//var cardId = promotions.payment_methods;
+						promoItem += '<li>';
 
-				promoItem += '<img src="' + thumbnail + '" alt="' + cardIssuerName + '">';
+						promoItem += '<img src="' + thumbnail + '" alt="' + cardIssuerName + '">';
 
-				promoItem += '<p>\
-						Hasta <strong>' + maxInstallments + '</strong> cuotas con <strong>' + cardIssuerName + '</strong>\
-					</p>\
-				</li>';
-			}
+						promoItem += '<p>\
+							Hasta <strong>' + maxInstallments + '</strong> cuotas con <strong>' + cardIssuerName + '</strong>\
+							</p>\
+							</li>';
+					}
 
-			// show the info
-			$("#promoList").html(promoItem);
-  	}
-	);
+					// show the info
+					$("#promoList").html(promoItem);
+				}
+			);
+		});
 
 	</script>
 
