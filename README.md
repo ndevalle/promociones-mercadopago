@@ -1,6 +1,6 @@
 Promociones MercadoPago
 =======================
 
-Widget de promociones de cuotas sin interés con MercadoPago.
+Ejemplo de promociones de cuotas sin interés con MercadoPago usando el API.
 
-[See it in action] (http://ndevalle.github.com/promociones-mercadopago)
+[Ver ejemplo] (http://aboglioli.github.io/promociones-mercadopago)
