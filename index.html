@@ -12,7 +12,7 @@
 
 	<ul id="promoList"> </ul>
 
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.9.0.min.js"></script>
 
 	<script>
 
@@ -20,7 +20,7 @@
 			$.getJSON("https://www.mercadopago.com/mla/credit_card_promos.json?marketplace=NONE&callback=?",
 				null,
 				function(data) {
-					var promoItem = "";
+					var promoItems = "";
 					var promotions = [];
 
 					// data is a JSONP type (array with 3 elements)
@@ -36,18 +36,18 @@
 						var maxInstallments = promotion.max_installments;
 						var thumbnail = promotion.payment_methods[0].thumbnail;
 						//var cardId = promotions.payment_methods;
-						promoItem += '<li>';
+						promoItems += '<li>';
 
-						promoItem += '<img src="' + thumbnail + '" alt="' + cardIssuerName + '">';
+						promoItems += '<img src="' + thumbnail + '" alt="' + cardIssuerName + '">';
 
-						promoItem += '<p>\
+						promoItems += '<p>\
 							Hasta <strong>' + maxInstallments + '</strong> cuotas con <strong>' + cardIssuerName + '</strong>\
 							</p>\
 							</li>';
 					}
 
 					// show the info
-					$("#promoList").html(promoItem);
+					$("#promoList").html(promoItems);
 				}
 			);
 		});
